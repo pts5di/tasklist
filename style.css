@@ -5,3 +5,6 @@ body {
     border:gray;
     border-style:groove;
 }
+button {
+    background-color:purple;
+}
