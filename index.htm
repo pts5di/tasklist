@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="en-US">
-    <head>
-        <link rel="stylesheet" href="style.css">
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-        <meta charset="utf-8">
-        <meta name="author" content="Paul Stevans">
-        <meta name="description" content="This is a to-do checklist that is being worked on as a personal project!">
-        <title>Task List</title>
-    </head>
-    <body>
-        <h1>Checklist</h1>
-        <form action="/test" method="post">
-            <div class="checklist">
-            <input type="checkbox" id="checkbox1" name="checkbox1"> <label for="checkbox1">Make lunch</label> <br>
-            <input type="checkbox" id="checkbox2" name="checkbox2"> <label for="checkbox2">Put lunch in a bag</label> <br>
-            <input type="checkbox" id="checkbox3" name="checkbox3"> <label for="checkbox3">Take lunch to school</label> <br>
-            <input type="text" id="newItem" name="newItem" placeholder="Eat lunch"> 
-            <button name="submit">Create New Item</button>
-            </div>
-        </form>
-    </body>
+
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta name="author" content="Paul Stevans">
+    <meta name="description" content="This is a to-do checklist that is being worked on as a personal project!">
+    <title>Task List</title>
+  </head>
+
+  <body>
+    <h1>Checklist</h1>
+    <form action="/test" method="post">
+      <fieldset class="checklist">
+        <legend>My Tasks</legend>
+        <input type="checkbox" id="checkbox1" name="checkbox1"> <label for="checkbox1">Make lunch</label> <br>
+        <input type="checkbox" id="checkbox2" name="checkbox2"> <label for="checkbox2">Put lunch in a bag</label> <br>
+        <input type="checkbox" id="checkbox3" name="checkbox3"> <label for="checkbox3">Take lunch to school</label> <br>
+      </fieldset>
+      <input type="text" id="newItem" name="newItem" placeholder="Eat lunch">
+      <button name="submit">Create New Item</button>
+
+    </form>
+  </body>
+
 </html>

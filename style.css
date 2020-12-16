@@ -1,10 +1,28 @@
-body {
-    background-color:plum;
-}
-.checklist {
-    border:gray;
-    border-style:groove;
-}
-button {
-    background-color:purple;
-}
+body{
+    font-family: serif;
+    background-color: rgb(230, 230, 230);
+  }
+  form {
+    font-family: sans-serif;
+    padding: 10px;
+    background-color: plum;
+    width: 500px;
+  }
+  fieldset{
+    position: relative;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    background-color: purple;
+    border-radius: 25px;
+    color: rgb(230,230,230);
+  }
+  legend {
+    background-color: rgb(221, 200, 221);
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  
