@@ -21,5 +21,7 @@ function repopulate(){
 }
 
 function addItem(itemText) {
-
+	checklistItems.push(itemText);
+  repopulate();
 }
+repopulate();
