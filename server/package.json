@@ -1,0 +1,22 @@
+{
+  "name": "tasklist-server",
+  "version": "1.0.0",
+  "description": "API server for tasklist project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/pts5di/tasklist.git"
+  },
+  "author": "Paul Stevans",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pts5di/tasklist/issues"
+  },
+  "homepage": "https://github.com/pts5di/tasklist#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
