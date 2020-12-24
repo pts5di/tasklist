@@ -1,6 +1,7 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require('express');
+const app = express();
+const port = 3000;
+const dbFunctions = require("./connect");
 
 let taskArray = [
     [
@@ -10,57 +11,38 @@ let taskArray = [
 ]
 app.use(express.json());
 
-app.post("/create", function (req, res) {
-    const id = taskArray.length;
-    taskArray.push([]);
-    res.send({
-        id,
-        tasks: taskArray[id],
-    });
+app.post("/create", async function (req, res) {
+    const tasklist = await dbFunctions.addNewTasklist();
+    res.send(tasklist);
 });
 
-app.get("/:tasklistId", function (req, res) {
-    const id = Number.parseInt(req.params["tasklistId"]);
-    if (Number.isNaN(id) || id > taskArray.length - 1 || id < 0) {
-        res.status(400);
-        return;
-    }
-    res.send({
-        id,
-        tasks: taskArray[id],
-    });
+app.get("/tasklist/:tasklistId", async function (req, res) {
+    const tasklist = await dbFunctions.getTasklistById(req.params["tasklistId"]);
+    res.send(tasklist);
 });
 
-app.post("/:tasklistId/add", function (req, res) {
-    const id = Number.parseInt(req.params["tasklistId"])
-    if (Number.isNaN(id) || id > taskArray.length - 1 || id < 0) {
-        res.status(400);
-        return;
-    }
+app.post("/tasklist/:tasklistId/add", async function (req, res) {
+    const tasklist = req.params["tasklistId"]
+    
     if (!req.body.hasOwnProperty("name") || !req.body.hasOwnProperty("isChecked")) {
         res.status(400);
         return;
     }
-    taskArray[id].push({ name: req.body.name, isChecked: req.body.isChecked });
-    res.send({
-        id,
-        tasks: taskArray[id],
-    });
+
+    const updatedTasklist = await dbFunctions.addItemToTasklist(tasklist, req.body);
+    res.send(updatedTasklist);
 });
 
-app.post("/:tasklistId/:taskId", function (req, res) {
-    const id = Number.parseInt(req.params["tasklistId"])
-    if (Number.isNaN(id) || id > taskArray.length - 1 || id < 0) {
-        res.status(400);
-        return;
-    }
+app.post("/tasklist/:tasklistId/:taskId", async function (req, res) {
     if (!req.body.hasOwnProperty("name") || !req.body.hasOwnProperty("isChecked")) {
         res.status(400);
         return;
     }
-    taskArray[id] = { name: req.body.name, isChecked: req.body.isChecked };
-    res.send({
-        id,
-        tasks: taskArray[id],
-    });
+    
+    const updatedTask = await dbFunctions.updateItemInTasklist(req.params["tasklistId"], req.params["taskId"], req.body);
+    res.send(updatedTask);
+});
+
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
 });
