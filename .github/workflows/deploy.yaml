@@ -26,6 +26,6 @@ jobs:
         run: scp -r -i ~/.ssh/github-azure "$GITHUB_WORKSPACE/server" orpington@52.250.52.230:~/.
         
       - name: Start new code
-        run: ssh -i ~/.ssh/github-azure orpington@52.250.52.230 "pkill node && cd server && npm install && nohup node index.js &"
+        run: ssh -i ~/.ssh/github-azure orpington@52.250.52.230 "pkill node || true && cd server && npm install && nohup node index.js &"
 
       
