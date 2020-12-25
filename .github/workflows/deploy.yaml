@@ -1,0 +1,31 @@
+name: Deploy
+
+on: push
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2.1.0
+        with: 
+          key: ${{ secrets.AZURE_SSH_PRIVATE_KEY }} 
+          name: github-azure
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+      
+      - name: Create env.json
+        run: 'echo "$ENV_JSON" > $GITHUB_WORKSPACE/server/.env.json'
+        env:
+          ENV_JSON: ${{ secrets.ENV_JSON }} 
+      
+      - name: Copy new files
+        run: scp -r -i ~/.ssh/github-azure "$GITHUB_WORKSPACE/server" orpington@52.250.52.230:~/.
+        
+      - name: Start new code
+        run: ssh -i ~/.ssh/github-azure orpington@52.250.52.230 "pkill node && cd server && npm install && nohup node index.js &"
+
+      
