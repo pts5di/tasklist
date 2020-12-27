@@ -101,8 +101,8 @@ async function updateItemInTasklist(tasklistId, taskId, item) {
 
     await taskCollection.findOneAndUpdate(query, update);
 
-    const tasks = await taskCollection.find({
-        tasklistId
+    const tasks = taskCollection.find({
+        tasklistId: ObjectId(tasklistId)
     });
 
     let result = {
