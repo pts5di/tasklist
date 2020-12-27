@@ -9,6 +9,7 @@ let taskArray = [
         { "name": "foo2", "isChecked": true },
     ]
 ]
+app.use(require("cors")());
 app.use(express.json());
 
 app.post("/create", async function (req, res) {
