@@ -42,7 +42,7 @@ async function getTasklistById(tasklistId) {
     const db = client.db("tasklist-db");
 
     const tasklistCollection = db.collection("tasklists");
-    const query = {"_id": ObjectId(tasklistId) };
+    const query = { "_id": ObjectId(tasklistId) };
     const tasklist = await tasklistCollection.findOne(query);
 
     const taskCollection = db.collection("tasks");
@@ -50,12 +50,12 @@ async function getTasklistById(tasklistId) {
         tasklistId: tasklist._id
     });
 
-    client.close();
-    return {
+    let result = {
         _id: tasklistId,
         tasks: tasks.toArray()
-
-    };
+    }
+    client.close();
+    return result;
 }
 
 async function addItemToTasklist(tasklistId, item) {
@@ -65,7 +65,7 @@ async function addItemToTasklist(tasklistId, item) {
     const db = client.db("tasklist-db");
 
     const tasklistCollection = db.collection("tasklists");
-    const query = {"_id": ObjectId(tasklistId) };
+    const query = { "_id": ObjectId(tasklistId) };
     const tasklist = await tasklistCollection.findOne(query);
 
     const taskCollection = db.collection("tasks");
@@ -77,14 +77,14 @@ async function addItemToTasklist(tasklistId, item) {
     const tasks = await taskCollection.find({
         tasklistId: tasklist._id
     });
-
-    client.close();
-   
-    return {
+    let result = {
         _id: tasklistId,
-        tasks: tasks.toArray()
+        tasks: await tasks.toArray()
+    }
+    client.close();
 
-    };
+    return result;
+
 }
 
 async function updateItemInTasklist(tasklistId, taskId, item) {
@@ -95,24 +95,25 @@ async function updateItemInTasklist(tasklistId, taskId, item) {
 
     const taskCollection = db.collection("tasks");
 
-    const query = {"_id": ObjectId(taskId) };
-    
-    const update = {$set: {isChecked: item.isChecked}};
+    const query = { "_id": ObjectId(taskId) };
+
+    const update = { $set: { isChecked: item.isChecked } };
 
     await taskCollection.findOneAndUpdate(query, update);
-    
+
     const tasks = await taskCollection.find({
         tasklistId
     });
 
-    client.close();
-   
-    return {
+    let result = {
         _id: tasklistId,
         tasks: tasks.toArray()
+    }
 
-    };
-}   
+    client.close();
+
+    return result;
+}
 
 
 module.exports = {
