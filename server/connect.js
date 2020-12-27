@@ -52,7 +52,7 @@ async function getTasklistById(tasklistId) {
 
     let result = {
         _id: tasklistId,
-        tasks: tasks.toArray()
+        tasks: await tasks.toArray()
     }
     client.close();
     return result;
@@ -107,7 +107,7 @@ async function updateItemInTasklist(tasklistId, taskId, item) {
 
     let result = {
         _id: tasklistId,
-        tasks: tasks.toArray()
+        tasks: await tasks.toArray()
     }
 
     client.close();
