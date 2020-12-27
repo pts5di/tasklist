@@ -70,7 +70,12 @@ function repopulate(fetchPromise) {
 }
 
 function addItem(itemText) {
-  repopulate(fetch(`${SERVER_URL}/tasklist/${window.tasklistId}/add`, { method: "POST" }));
+  repopulate(fetch(`${SERVER_URL}/tasklist/${window.tasklistId}/add`, {
+    method: "POST", headers: {
+      "content-type": "application/json"
+    },
+    body: JSON.stringify({name: itemText, isChecked: false})
+  }));
 }
 
 initialize();
