@@ -1,4 +1,4 @@
-const SERVER_URL = "http://52.250.52.230:3000";
+const SERVER_URL = "http://backend.tasks.paulstevans.com:3000";
 
 function initialize() {
   var queryParams = new URLSearchParams(window.location.search);
