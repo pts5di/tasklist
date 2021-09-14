@@ -2,6 +2,12 @@
 <html lang="en-US">
 
   <head>
+    <script>
+    if (location.protocol !== 'http:') {
+      console.log("Unfortunately, I haven't set up SSL for this project yet, and some modern browsers block mixed content. Redirecting to HTTP.");
+      location.replace(`http:${location.href.substring(location.protocol.length)}`);
+    }
+    </script>
     <link rel="stylesheet" href="scripts/style.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <meta charset="utf-8">
